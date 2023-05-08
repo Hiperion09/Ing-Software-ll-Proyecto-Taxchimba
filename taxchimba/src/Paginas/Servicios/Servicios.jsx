@@ -1,79 +1,89 @@
-import React from 'react'
+import React, {useState} from "react";
 import "./servicios.css";
-
+import image from "../../Iconos/location.png";
+import Autocompletado from "../../Mapas/Autocompletado";
+import Map from "../../Mapas/Map";
 const Servicios = () => {
+  const [value, setValue] = useState(null);
+  console.log(value)
   return (
-    <div>
-      <div id="viewport">
-        <div id="sidebar">
-          <header>
-            <a href="#">My App</a>
-          </header>
-          <ul class="nav">
-            <li>
-              <a href="#">
-                <i class="zmdi zmdi-view-dashboard"></i> Dashboard
-              </a>
-            </li>
-            <li>
-              <a href="#">
-                <i class="zmdi zmdi-link"></i> Shortcuts
-              </a>
-            </li>
-            <li>
-              <a href="#">
-                <i class="zmdi zmdi-widgets"></i> Overview
-              </a>
-            </li>
-            <li>
-              <a href="#">
-                <i class="zmdi zmdi-calendar"></i> Events
-              </a>
-            </li>
-            <li>
-              <a href="#">
-                <i class="zmdi zmdi-info-outline"></i> About
-              </a>
-            </li>
-            <li>
-              <a href="#">
-                <i class="zmdi zmdi-settings"></i> Services
-              </a>
-            </li>
-            <li>
-              <a href="#">
-                <i class="zmdi zmdi-comment-more"></i> Contact
-              </a>
-            </li>
-          </ul>
-        </div>
-
-        <div id="content">
-          <nav class="navbar navbar-default">
-            <div class="container-fluid">
-              <ul class="nav navbar-nav navbar-right">
-                <li>
-                  <a href="#">
-                    <i class="zmdi zmdi-notifications text-danger"></i>
-                  </a>
-                </li>
-                <li>
-                  <a href="#">Test User</a>
-                </li>
-              </ul>
+    <div id="viewport">
+      <div id="sidebar">
+        <header>
+          <a href="#">Taxchimba</a>
+        </header>
+        <div className="nav">
+          <div className="switch-servicio">
+            <div className="botones">
+              <button className="boton-taxis">Transporte</button>
+              <button className="boton-encomiendas">Encomiendas</button>
             </div>
-          </nav>
-          <div class="container-fluid">
-            <h1>Simple Sidebar</h1>
-            <p>
-              Make sure to keep all page content within the
-              <code>#content</code>.
-            </p>
+
+            <div className="input-servicios">
+              <div className="input-servicios-descripcion">
+                <img src={image} alt="" />
+                <p>Inserte su origen</p>
+              </div>
+              <div className="input-servicios-info">
+                <Autocompletado descripcion={'Origen...'} info_geo={1}/>
+              </div>
+            </div>
+
+            <div className="input-servicios">
+              <div className="input-servicios-descripcion">
+                <img src={image} alt="" />
+                <p>Inserte su destino</p>
+              </div>
+              <div className="input-servicios-info">
+                <Autocompletado descripcion={'Destino...'} info_geo={2}/>
+              </div>
+            </div>
+
+            <div className="input-servicios">
+              <div className="input-servicios-descripcion">
+                <img src={image} alt="" />
+                <p>Precio</p>
+              </div>
+              <div className="input-servicios-info">
+                <input
+                  type="text"
+                  className="form-control"
+                  placeholder="Precio"
+                />
+              </div>
+            </div>
+          </div>
+          <div className="localizaciones">
+            <ul>
+              <li>option 1</li>
+              <li>option 2</li>
+              <li>option 3</li>
+              <li>option 4</li>
+              <li>option 5</li>
+              <li>option 6</li>
+              <li>option 7</li>
+              <li>option 8</li>
+              <li>option 9</li>
+              <li>option 8</li>
+              <li>option 9</li>
+              <li>option 8</li>
+              <li>option 9</li>
+            </ul>
+          </div>
+
+          <div className="btn-enviar">
+            <button className="btn-solicitud"> Enviar </button>
           </div>
         </div>
       </div>
-    </div>
-  )
-}
 
-export default Servicios
+      <div id="content">
+        <div class="container-fluid">
+          <Map/>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default Servicios;
