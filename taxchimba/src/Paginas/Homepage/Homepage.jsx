@@ -1,6 +1,6 @@
 import React from "react";
 import "./homepage.css";
-
+import { Link } from "react-router-dom";
 const Homepage = () => {
   return (
     <div>
@@ -14,7 +14,9 @@ const Homepage = () => {
 
           <ul class="main-menu">
             <li>
-              <a href="#pide">Pide servicio</a>
+              <Link to="/servicios">
+                <a href="#pide">Pide servicio</a>
+              </Link>
             </li>
             <li>
               <a href="#preguntas">Preguntas frecuentes</a>

@@ -4,7 +4,7 @@ import { useSelector } from "react-redux/es/hooks/useSelector";
 import { selectOrigen, selectDestino } from "../Redux/Slices/navSlice";
 const AnyReactComponent = ({ text }) => <div>{text}</div>;
 
-export default function Map(){
+export default function Map({setCoordenadas, setLimites, coordenadas}){
 
     const origen = useSelector(selectOrigen)
     const destino = useSelector(selectDestino)
@@ -13,10 +13,10 @@ export default function Map(){
     console.log(destino)
   const defaultProps = {
     center: {
-      lat: 10.99835602,
-      lng: 77.01502627
+      lat: origen,
+      lng: destino
     },
-    zoom: 11
+    zoom: 14
   };
 
   return (
@@ -24,8 +24,15 @@ export default function Map(){
     <div style={{ height: '100vh', width: '100%' }}>
       <GoogleMapReact
         bootstrapURLKeys={{ key: "AIzaSyAETUpSaOntSOMh1PepKtpAejiCd6zn0x4" }}
-        defaultCenter={defaultProps.center}
+        defaultCenter={coordenadas}
+        center={coordenadas}
         defaultZoom={defaultProps.zoom}
+        margin={[50, 50, 50, 50]}
+        options={''}
+        onChange={(e) => {
+          setCoordenadas({ lat: e.center.lat, lng: e.center.lng});
+          setLimites({ne: e.marginBounds.ne, sw: e.marginBounds.sw})
+        }}
       >
         <AnyReactComponent
           lat={59.955413}
