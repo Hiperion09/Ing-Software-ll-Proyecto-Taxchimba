@@ -36,6 +36,10 @@ const DetallesSitios = ({ lugar }) => {
         <Typography gutterBottom variant="h5">
           {lugar.name}
         </Typography>
+        <Box display="flex" justifyContent="space-between" my={2}>
+          <Rating name="read-only" value={Number(lugar.rating)} readOnly />
+          <Typography component="legend">{lugar.num_reviews} calificacion{lugar.num_reviews > 1 && 'es'}</Typography>
+        </Box>
         <Box display="flex" justifyContent="space-between">
           <Typography variant="subtitle1">Precio</Typography>
           <Typography gutterBottom variant="subtitle1">

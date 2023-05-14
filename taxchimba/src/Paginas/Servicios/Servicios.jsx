@@ -11,8 +11,11 @@ const Servicios = () => {
   const [value, setValue] = useState(null); //valor de posicion obtenida del autocompletado
   const [posicionActual, setPosicionActual] = useState(null) //posicion actual
   const [sitioInteres, setSitioInteres] = useState([]) //objeto de info de sitios de interes
+  const [sitiosFilrados, setSitiosFilrados] = useState([])
   const [coordenadas, setCoordenadas] = useState({}) //posicion actual
   const [limites, setLimites] = useState({}) //posicion actual
+  const [tipo, setTipo] = useState('restaurantes');
+  const [calificacion, setCalificacion] = useState('');
   console.log(value)
   const [ubicacion, setUbicacion] = useState(null);
 
@@ -23,13 +26,18 @@ const Servicios = () => {
   }, []);
 
   useEffect(() => {
+    const lugaresFiltrados = sitioInteres.filter((sitio) => sitio.rating > calificacion);
+    setSitiosFilrados(lugaresFiltrados);
+  }, [calificacion]);
+
+  useEffect(() => {
     console.log(coordenadas, limites);
-    getPlacesData(limites.sw, limites.ne)
+    getPlacesData(tipo, limites.sw, limites.ne)
     .then((data)=>{
       console.log(data)
       setSitioInteres(data)
     })
-  }, [coordenadas, limites]);
+  }, [tipo, coordenadas, limites]);
 
   return (
     <div id="viewport">
@@ -86,7 +94,13 @@ const Servicios = () => {
           </div>
           <div className="localizaciones">
             <ul>
-              <SitiosInteres sitioInteres={sitioInteres}/>
+              <SitiosInteres 
+                sitioInteres={sitiosFilrados.length ? sitiosFilrados : sitioInteres} 
+                tipo={tipo} 
+                setTipo={setTipo} 
+                calificacion={calificacion}
+                setCalificacion={setCalificacion}
+                />
             </ul>
           </div>
         </div>

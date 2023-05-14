@@ -1,11 +1,10 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect, useRef, createRef} from 'react'
 import { CircularProgress, Grid, Typography, InputLabel, MenuItem, FormControl, Select } from '@material-ui/core';
 import useStyles from './sitiosinteres';
 import DetallesSitios from './DetallesSitios';
-const SitiosInteres = ({sitioInteres}) => {
+const SitiosInteres = ({sitioInteres, tipo, setTipo, calificacion, setCalificacion}) => {
     const  classes = useStyles()
-    const [tipo, setTipo] = useState('restaurantes');
-    const [calificacion, setCalificacion] = useState('');
+    
     
   return (
     <div className={classes.container}>
@@ -15,9 +14,9 @@ const SitiosInteres = ({sitioInteres}) => {
         <FormControl className={classes.formControl}>
             <InputLabel>Tipo</InputLabel>
             <Select value={tipo} onChange={(e) => setTipo(e.target.value)}>
-                <MenuItem value="restaurantes">Restaturantes</MenuItem>
-                <MenuItem value="hoteles">Hoteles</MenuItem>
-                <MenuItem value="atracciones">Atracciones</MenuItem>
+                <MenuItem value="restaurants">Restaturantes</MenuItem>
+                <MenuItem value="hotels">Hoteles</MenuItem>
+                <MenuItem value="attractions">Atracciones</MenuItem>
             </Select>
         </FormControl>
         <FormControl className={classes.formControl}>
