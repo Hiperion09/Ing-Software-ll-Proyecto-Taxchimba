@@ -5,8 +5,11 @@ import Homepage from './Paginas/Homepage/Homepage';
 import Servicios from './Paginas/Servicios/Servicios';
 import Login from './Paginas/Login/Login';
 import Registro from './Paginas/Login/Registro/Registro';
+import axios from 'axios';
 
 function App() {
+  axios.defaults.baseURL='http://localhost:4040';
+  axios.defaults.withCredentials=true;
   return (
     <div className="App">
       <Routes>

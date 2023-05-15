@@ -6,8 +6,12 @@ import Autocompletado from "../../Mapas/Autocompletado";
 import Map from "../../Mapas/Map";
 import SitiosInteres from "./SitiosInteres/SitiosInteres.jsx";
 import { getPlacesData } from "../../api/apiLugares";
+import { useSelector } from "react-redux/es/hooks/useSelector";
+import { selectUser } from "../../Redux/Slices/usuarioSlice";
+import { selectOrigen, selectDestino } from "../../Redux/Slices/navSlice";
 
 const Servicios = () => {
+
   const [value, setValue] = useState(null); //valor de posicion obtenida del autocompletado
   const [posicionActual, setPosicionActual] = useState(null) //posicion actual
   const [sitioInteres, setSitioInteres] = useState([]) //objeto de info de sitios de interes
@@ -16,9 +20,25 @@ const Servicios = () => {
   const [limites, setLimites] = useState({}) //posicion actual
   const [tipo, setTipo] = useState('restaurantes');
   const [calificacion, setCalificacion] = useState('');
+  const [precio, setPrecio] = useState(null); //campo 3 -- creacion de servicio
+  const origen = useSelector(selectOrigen) //campo 2 -- origen
+  const destino = useSelector(selectDestino) //campo 1 --- destino
+  console.log(origen)
+  console.log(destino)
   console.log(value)
   const [ubicacion, setUbicacion] = useState(null);
 
+  const handleClick = (destino, origen, precio, usuario) => {
+    //logica para conectar con la BD, subir la info y cargarla
+    console.log(destino.location.lat)//desectructurazion
+    console.log("Origen: "+origen.location)
+    console.log("Precio: "+precio)
+    console.log("Usuario: "+usuario)
+  };
+
+  //Obtencion de usuario
+  const usuario = useSelector(selectUser)
+  console.log(usuario.usuario.tipo) //objeto de usuario del login campo 4
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(({ coords : {latitude, longitude}})=>{
       setCoordenadas({ lat: latitude, lng: longitude})
@@ -38,6 +58,9 @@ const Servicios = () => {
       setSitioInteres(data)
     })
   }, [tipo, coordenadas, limites]);
+
+  
+  
 
   return (
     <div id="viewport">
@@ -83,13 +106,15 @@ const Servicios = () => {
               <div className="input-servicios-info">
                 <input
                   type="text"
+                  value={precio}
+                  onChange={(e) => setPrecio(e.target.value)}
                   className="form-control"
                   placeholder="Precio"
                 />
               </div>
             </div>
             <div className="btn-enviar">
-            <button className="btn-solicitud"> Enviar </button>
+            <button className="btn-solicitud" onClick={() => handleClick(destino, origen, precio, usuario)}> Enviar </button>
           </div>
           </div>
           <div className="localizaciones">

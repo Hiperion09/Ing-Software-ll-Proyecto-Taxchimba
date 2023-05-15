@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useState } from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -11,6 +12,11 @@ import Box from '@material-ui/core/Box';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
+import Logo from "../../Iconos/logo.jpg"
+import axios from "axios"
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux/es/hooks/useDispatch";
+import { setUsuario } from "../../Redux/Slices/usuarioSlice";
 
 
 function Copyright(props) {
@@ -29,13 +35,31 @@ function Copyright(props) {
 
 
 export default function Login() {
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
+  const dispatch = useDispatch()
+  const [correoLogin, setCorreoLogin] = useState('');
+  const [password, setPassword] = useState('');
+  const navigate = useNavigate();
+
+  console.log(correoLogin)
+
+  const Login = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await axios.get('/login', {
+        params: { correoLogin, password }
+      });
+      console.log(response.data);
+      dispatch(setUsuario({
+        usuario: response.data
+    }))
+      setTimeout(redirectToServicios, 3000);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const redirectToServicios = () => {
+    navigate('/servicios'); // Redireccionar a la URL "/servicios"
   };
 
   return (
@@ -49,44 +73,52 @@ export default function Login() {
             alignItems: 'center',
           }}
         >
-          <Avatar sx={{ m: 5, bgcolor: 'secondary.main' }}>
-            <LockOutlinedIcon />
-          </Avatar>
+          <Avatar src={Logo} alt="Logo" sx={{width: 56, height: 56 }}/>
           <Typography component="h1" variant="h5">
-            Sign in
+            Inicio de Sesion
           </Typography>
-          <Box component="form" onSubmit={handleSubmit}  sx={{ mt: 1 }}>
+
+          {/* Formulario */}
+          <Box component="form" onSubmit={Login}  sx={{ mt: 1 }}>
+            {/* Campo 1: Correo */}
             <TextField
               margin="normal"
+              value={correoLogin}
               required
               fullWidth
               id="email"
-              label="Email Address"
+              label="Correo electronico"
               name="email"
               autoComplete="email"
               autoFocus
+              onChange={(e) => setCorreoLogin(e.target.value)}
             />
+            {/* Campo 2: Contraseña */}
             <TextField
               margin="normal"
+              value={password}
               required
               fullWidth
               name="password"
-              label="Password"
+              label="Contraseña"
               type="password"
               id="password"
               autoComplete="current-password"
+              onChange={(e) => setPassword(e.target.value)}
             />
+            {/* Boton de recordar */}
             <FormControlLabel
               control={<Checkbox value="remember" color="primary" />}
-              label="Remember me"
+              label="Recuerda la contraseña"
             />
+            {/* Boton de iniciar sesion */}
             <Button
               type="submit"
               fullWidth
               variant="contained"
               color="secondary"
             >
-              Sign In
+              Iniciar Sesion
             </Button>
             <Grid container>
               <Grid item xs>
