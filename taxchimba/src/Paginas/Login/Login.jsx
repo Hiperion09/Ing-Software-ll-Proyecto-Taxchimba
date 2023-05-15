@@ -1,100 +1,108 @@
-import React from 'react'
-import "./login.scss";
+import * as React from 'react';
+import Avatar from '@material-ui/core/Avatar';
+import Button from '@material-ui/core/Button';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import TextField from '@material-ui/core/TextField';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Checkbox from '@material-ui/core/Checkbox';
+import Link from '@material-ui/core/Link';
+import Grid from '@material-ui/core/Grid';
+import Box from '@material-ui/core/Box';
+import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
+import Typography from '@material-ui/core/Typography';
+import Container from '@material-ui/core/Container';
 
-const Login = () => {
+
+function Copyright(props) {
   return (
-    <div class="contenedor-formularios">
-      <ul class="contenedor-tabs">
-        <li class="tab tab-segunda active">
-          <a href="#iniciar-sesion">Iniciar Sesión</a>
-        </li>
-        <li class="tab tab-primera">
-          <a href="#registrarse">Registrarse</a>
-        </li>
-      </ul>
-
-      <div class="contenido-tab">
-        <div id="iniciar-sesion">
-          <h1 clas="titulo-iniciarsesion">Iniciar Sesión</h1>
-          <form action="#" method="post">
-            <div class="contenedor-input">
-              <label>
-                Usuario <span class="req">*</span>
-              </label>
-              <input type="text" required />
-            </div>
-
-            <div class="contenedor-input">
-              <label>
-                Contraseña <span class="req">*</span>
-              </label>
-              <input type="password" required />
-            </div>
-            <p class="forgot">
-              <a href="#">Se te olvidó la contraseña?</a>
-            </p>
-            <input
-              type="submit"
-              class="button button-block"
-              value="Iniciar Sesión"
-            />
-          </form>
-        </div>
-
-        <div id="registrarse">
-          <h1>Registrarse</h1>
-          <form action="#" method="post">
-            <div class="fila-arriba">
-              <div class="contenedor-input">
-                <label>
-                  Nombre <span class="req">*</span>
-                </label>
-                <input type="text" required />
-              </div>
-
-              <div class="contenedor-input">
-                <label>
-                  Apellido <span class="req">*</span>
-                </label>
-                <input type="text" required />
-              </div>
-            </div>
-            <div class="contenedor-input">
-              <label>
-                Usuario <span class="req">*</span>
-              </label>
-              <input type="text" required />
-            </div>
-            <div class="contenedor-input">
-              <label>
-                Email <span class="req">*</span>
-              </label>
-              <input type="email" required />
-            </div>
-            <div class="contenedor-input">
-              <label>
-                Contraseña <span class="req">*</span>
-              </label>
-              <input type="password" required />
-            </div>
-
-            <div class="contenedor-input">
-              <label>
-                Repetir Contraseña <span class="req">*</span>
-              </label>
-              <input type="password" required />
-            </div>
-
-            <input
-              type="submit"
-              class="button button-block"
-              value="Registrarse"
-            />
-          </form>
-        </div>
-      </div>
-    </div>
-  )
+    <Typography variant="body2" color="text.secondary" align="center" {...props}>
+      {'Copyright © '}
+      <Link color="inherit" href="https://mui.com/">
+        Your Website
+      </Link>{' '}
+      {new Date().getFullYear()}
+      {'.'}
+    </Typography>
+  );
 }
 
-export default Login
+
+
+export default function Login() {
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const data = new FormData(event.currentTarget);
+    console.log({
+      email: data.get('email'),
+      password: data.get('password'),
+    });
+  };
+
+  return (
+      <Container component="main" maxWidth="xs">
+        <CssBaseline />
+        <Box
+          sx={{
+            marginTop: 8,
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+          }}
+        >
+          <Avatar sx={{ m: 5, bgcolor: 'secondary.main' }}>
+            <LockOutlinedIcon />
+          </Avatar>
+          <Typography component="h1" variant="h5">
+            Sign in
+          </Typography>
+          <Box component="form" onSubmit={handleSubmit}  sx={{ mt: 1 }}>
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              id="email"
+              label="Email Address"
+              name="email"
+              autoComplete="email"
+              autoFocus
+            />
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              name="password"
+              label="Password"
+              type="password"
+              id="password"
+              autoComplete="current-password"
+            />
+            <FormControlLabel
+              control={<Checkbox value="remember" color="primary" />}
+              label="Remember me"
+            />
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              color="secondary"
+            >
+              Sign In
+            </Button>
+            <Grid container>
+              <Grid item xs>
+                <Link href="#" variant="body2">
+                  Forgot password?
+                </Link>
+              </Grid>
+              <Grid item>
+                <Link href="/registro" variant="body2">
+                  {"Don't have an account? Sign Up"}
+                </Link>
+              </Grid>
+            </Grid>
+          </Box>
+        </Box>
+        <Copyright sx={{ mt: 8, mb: 4 }} />
+      </Container>
+  );
+}
