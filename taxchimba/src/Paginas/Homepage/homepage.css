@@ -36,6 +36,7 @@
   .main-nav {
     display: flex;
     align-items: center;
+    background-color: #fff;
     justify-content: space-between;
     height: 60px;
     padding: 20px 0;

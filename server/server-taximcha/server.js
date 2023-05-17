@@ -26,6 +26,8 @@ const corsOptions = {
 app.use(cors(corsOptions))
 app.use('/registro', require('./Routes/registerRoutes'));
 app.use('/login', require('./Routes/loginRoutes'));
+app.use('/servicios', require('./Routes/solicitudRoutes'));
+app.use('/prestador', require('./Routes/solicitudRoutes'));
 
 app.get('/test', (req, res) => {
     res.json('test ok')

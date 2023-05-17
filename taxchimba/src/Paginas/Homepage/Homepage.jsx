@@ -14,7 +14,7 @@ const Homepage = () => {
 
           <ul class="main-menu">
             <li>
-              <Link to="/servicios">
+              <Link to="/login">
                 <a href="#pide">Pide servicio</a>
               </Link>
             </li>

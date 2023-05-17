@@ -5,10 +5,12 @@ import image from "../../Iconos/location.png";
 import Autocompletado from "../../Mapas/Autocompletado";
 import Map from "../../Mapas/Map";
 import SitiosInteres from "./SitiosInteres/SitiosInteres.jsx";
+import Prestador from "./Prestador/Prestador";
 import { getPlacesData } from "../../api/apiLugares";
 import { useSelector } from "react-redux/es/hooks/useSelector";
 import { selectUser } from "../../Redux/Slices/usuarioSlice";
 import { selectOrigen, selectDestino } from "../../Redux/Slices/navSlice";
+import axios from "axios";
 
 const Servicios = () => {
 
@@ -28,12 +30,28 @@ const Servicios = () => {
   console.log(value)
   const [ubicacion, setUbicacion] = useState(null);
 
-  const handleClick = (destino, origen, precio, usuario) => {
+  const handleClick = async (destino, origen, precio, usuario) => {
     //logica para conectar con la BD, subir la info y cargarla
-    console.log(destino.location.lat)//desectructurazion
-    console.log("Origen: "+origen.location)
-    console.log("Precio: "+precio)
-    console.log("Usuario: "+usuario)
+    const origenLat = origen.location.lat
+    const origenLng = origen.location.lng
+    const destinoLat = destino.location.lat
+    const destinoLng = destino.location.lng
+    const usuarioNombre = usuario.usuario.nombres
+    const usuarioApellido = usuario.usuario.apellidos
+    const usuarioCelular = usuario.usuario.celular
+    const usuarioCorreo = usuario.usuario.correo
+    
+    const {data} = await axios.post('/servicios', {
+      origenLat, 
+      origenLng, 
+      destinoLat, 
+      destinoLng, 
+      precio,
+      usuarioNombre, 
+      usuarioApellido,
+      usuarioCelular,
+      usuarioCorreo
+    })
   };
 
   //Obtencion de usuario
