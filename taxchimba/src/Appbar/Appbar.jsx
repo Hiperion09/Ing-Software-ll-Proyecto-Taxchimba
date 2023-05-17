@@ -13,16 +13,12 @@ import FormGroup from '@material-ui/core/FormGroup';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 
-export default function Appbar() {
-  const [auth, setAuth] = useState(true);
-  const [anchorEl, setAnchorEl] = useState(null);
+export default function MenuAppBar() {
+  const [auth, setAuth] = React.useState(true);
+  const [anchorEl, setAnchorEl] = React.useState(null);
 
-  const handleChange = (e) => {
-    setAuth(e.target.checked);
-  };
-
-  const handleMenu = (e) => {
-    setAnchorEl(e.current.target);
+  const handleMenu = (event) => {
+    setAnchorEl(event.currentTarget);
   };
 
   const handleClose = () => {
@@ -38,7 +34,7 @@ export default function Appbar() {
             edge="start"
             color="inherit"
             aria-label="menu"
-            sx={{ mr: 2 }}
+            sx={{ mr: 20 }}
           >
             <MenuIcon />
           </IconButton>
@@ -46,7 +42,7 @@ export default function Appbar() {
             Photos
           </Typography>
           {auth && (
-            <div>
+            <div className='div-items'>
               <IconButton
                 size="large"
                 aria-label="account of current user"
@@ -58,8 +54,8 @@ export default function Appbar() {
                 <AccountCircle />
               </IconButton>
               <Menu
-                id="menu-appbar"
                 anchorEl={anchorEl}
+                sx={{ pl: 60 }}
                 anchorOrigin={{
                   vertical: 'top',
                   horizontal: 'right',

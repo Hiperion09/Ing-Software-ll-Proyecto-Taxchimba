@@ -10,6 +10,7 @@ import { getPlacesData } from "../../api/apiLugares";
 import { useSelector } from "react-redux/es/hooks/useSelector";
 import { selectUser } from "../../Redux/Slices/usuarioSlice";
 import { selectOrigen, selectDestino } from "../../Redux/Slices/navSlice";
+import Appbar from "../../Appbar/Appbar";
 import axios from "axios";
 
 const Servicios = () => {
@@ -81,6 +82,8 @@ const Servicios = () => {
   
 
   return (
+    <div id="prestador-container">
+      <Appbar />
     <div id="viewport">
       <div id="sidebar">
         <header>
@@ -158,6 +161,7 @@ const Servicios = () => {
             />
         </div>
       </div>
+    </div>
     </div>
   );
 };
