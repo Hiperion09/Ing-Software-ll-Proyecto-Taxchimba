@@ -45,9 +45,9 @@ export default function Login() {
   const Login = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.get('/login', {
-        params: { correoLogin, password }
-      });
+      const response = await axios.post('/login', {
+          correo: correoLogin,
+        });
       console.log(response.data);
       dispatch(setUsuario({
         usuario: response.data

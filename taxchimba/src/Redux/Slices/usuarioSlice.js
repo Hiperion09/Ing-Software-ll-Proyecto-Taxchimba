@@ -11,11 +11,13 @@ export const userSlice = createSlice({
         setUsuario: (state, action) => {
             state.usuario = action.payload;
         },
+        setNull: (state) => {
+            state.usuario = null;
+        },
     }
 })
 
-export const {setUsuario} = userSlice.actions
-
+export const {setUsuario, setNull} = userSlice.actions
 //Seleccionadores para obtener informacion
 export const selectUser = (state) => state.user.usuario;
 

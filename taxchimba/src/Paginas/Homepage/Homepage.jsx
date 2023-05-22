@@ -1,7 +1,15 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./homepage.css";
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux/es/hooks/useDispatch";
+import { setNull } from "../../Redux/Slices/usuarioSlice";
+
 const Homepage = () => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(setNull({ usuario: null }));
+  }, []);
   return (
     <div>
       <div class="menu-btn">
@@ -31,11 +39,12 @@ const Homepage = () => {
         <header class="showcase">
           <h2>Taxchimba</h2>
           <p>La opcion mas rapida para ti y para tus encomiendas</p>
-          <a href="#" class="btn">
-            Pedir servicio <i class="fas fa-chevron-right"></i>
-          </a>
+          <Link to="/login">
+            <a href="#" class="btn">
+              Pedir servicio <i class="fas fa-chevron-right"></i>
+            </a>
+          </Link>
         </header>
-
         <a name="preguntas"></a>
         <section class="xbox">
           <div class="content">

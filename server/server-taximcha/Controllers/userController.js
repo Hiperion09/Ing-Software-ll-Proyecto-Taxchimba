@@ -15,7 +15,7 @@ const createNewUser = asyncHandler(async (req, res) => {
 
   const findUser = asyncHandler(async (req, res) => {
     const { correo } = req.body;
-    const foundUser = await User.findOne(correo);
+    const foundUser = await User.findOne({ correo: correo }).exec();
     console.log(foundUser);
     if (foundUser) {
       res.json(foundUser);

@@ -112,10 +112,6 @@
     height: 60px;
   }
   
-  /* Agrega estilos para el nombre dentro de los artículos */
-  #sidebar main article name {
-    color: rgb(255 255 255 / 50%);
-  }
   
   /* Agrega estilos para los párrafos dentro de los artículos */
   #sidebar main article p {
@@ -125,6 +121,5 @@
   }
 
   #sidebar main article button{
-    background-color: aqua;
     margin: 10px;
   }

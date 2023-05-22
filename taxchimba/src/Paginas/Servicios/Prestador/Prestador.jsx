@@ -8,7 +8,7 @@ import Article from "./detalleServicio/detalleServicio";
 import Appbar from "../../../Appbar/Appbar";
 import axios from "axios";
 
-const Prestador = () => {
+const Prestador = ({tipoUsuario}) => {
   const [coordenadas, setCoordenadas] = useState({});
   const [limites, setLimites] = useState({});
   const [datosSolic, setDatosSolic] = useState([]);
@@ -34,7 +34,7 @@ const Prestador = () => {
 
   return (
     <div id="prestador-container">
-      <Appbar />
+      <Appbar tipoUsuario={tipoUsuario}/>
 
       <div id="viewport">
         <div id="sidebar">
@@ -49,7 +49,7 @@ const Prestador = () => {
                   <p>Cargando datos...</p>
                 ) : (
                   datosSolic.map((objeto, index) => (
-                    <Article key={index} image={userImage} objeto={objeto} />
+                    <Article key={index} image={userImage} objeto={objeto}/>
                   ))
                 )}
               </main>

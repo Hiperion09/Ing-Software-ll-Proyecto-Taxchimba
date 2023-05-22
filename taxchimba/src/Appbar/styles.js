@@ -1,14 +1,17 @@
 import { makeStyles } from '@material-ui/core/styles';
 
 export default makeStyles((theme) => ({
-  formControl: {
-    margin: theme.spacing(1), minWidth: 120, marginBottom: '30px',
+  appBar: {
+    backgroundColor: '#0087B8',
+    float: 'left',
+    height: '55px'
   },
-  selectEmpty: {
-    marginTop: theme.spacing(2),
+  toolBar: {
+    justifyContent: 'flex-end'
   },
-  loading: {
-    height: '600px', display: 'flex', justifyContent: 'center', alignItems: 'center',
+  typography: {
+    marginRight: "25px",
+    marginLeft: "25px",
   },
   container: {
     padding: '25px',
