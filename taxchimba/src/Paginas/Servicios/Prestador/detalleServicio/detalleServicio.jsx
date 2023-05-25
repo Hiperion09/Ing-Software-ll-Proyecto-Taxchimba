@@ -39,7 +39,7 @@ const Article = ({ key, image, objeto}) => {
       .geocode({
         q: cords,
         language: "fr",
-        key: "6cf83963085d4f709ded0cf148705d5a",
+        key: "ce5399b6a1ae4b12b0959695142c684f",
       })
       .then((data) => {
         if (data.status.code == 200 && data.results.length > 0) {

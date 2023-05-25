@@ -1,0 +1,10 @@
+.marker{
+    font-size: 30px;
+    color: blue;
+}
+
+.SuperAwesomePin img {
+    /* Estilos para la imagen dentro del div */
+    width: 40px;
+    height: 40px;
+  }
